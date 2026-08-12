@@ -19,10 +19,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Run tests
-        run: |
-          # If your tests are inside a src folder, navigate there; otherwise, run pytest directly
-          if [ -d "src" ]; then
-            cd src
-          fi
-          python -m pytest addition.py
+      - name: Install dependencies
+      run: |
+        pip install pytest
+
+       - name: Run tests
+      run: |
+        if [ -d "src" ]; then
+          cd src
+        fi
+        pytest addition.py
