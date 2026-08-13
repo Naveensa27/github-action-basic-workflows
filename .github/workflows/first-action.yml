@@ -1,31 +1,24 @@
-name: My First GitHub Actions
+name: Simple CI Workflow
 
-on: [push]
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
+    # The type of machine that the job will run on
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        python-version: ["3.8", "3.9"]
-
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies
-        run: |
-          pip install pytest
-
-      - name: Run tests
-        run: |
-        # List files in the workspace to see where addition.py actually lives
-        
-        # Run pytest targeting the correct path (adjust 'src/addition.py' if it's located elsewhere)
-        pytest addition.py
+      # Runs a single command using the runner operating system
+      - name: Run a simple script
+        run: echo "Hello, World from GitHub Actions!"
