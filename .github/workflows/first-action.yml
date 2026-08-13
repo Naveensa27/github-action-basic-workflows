@@ -25,7 +25,9 @@ jobs:
 
       - name: Run tests
         run: |
-          if [ -d "src" ]; then
-            cd src
-          fi
-          pytest addition.py
+        # List files in the workspace to see where addition.py actually lives
+        echo "Current directory contents:"
+        ls -la
+        
+        # Run pytest targeting the correct path (adjust 'src/addition.py' if it's located elsewhere)
+        pytest addition.py
